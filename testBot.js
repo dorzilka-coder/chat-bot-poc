@@ -2,7 +2,7 @@ const { OpenAIApi, Configuration } = require('openai');
 
 // Set up OpenAI API credentials
 const config = new Configuration({
-  apiKey: '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'
+  apiKey: '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'
 })
 
 const openai = new OpenAIApi(config);
@@ -14,13 +14,13 @@ async function getChatbotResponse(query) {
 
   try {
     const completions = await openai.createCompletion({
-      model: 'davinci:ft-personal:cal-customer-support-2023-03-14-13-07-52',
+      model: 'ada:ft-cal-digital:cal-customer-support-classification-2023-03-16-14-48-11',
       //suffix: '_cal-customer-support',
       prompt: prompt,
-      max_tokens: 192,
+      max_tokens: 2,
       n: 1,
-      // stop: ['\n'], // Stop generation at end of each answer
-       temperature: 0 // Control the creativity of the generated responses
+      logprobs: 1,
+      temperature: 0 // Control the creativity of the generated responses
     });
   
     return completions.data.choices[0].text.trim();
@@ -39,10 +39,16 @@ async function getChatbotResponse(query) {
 
 
 // Example usage:
-const query = 'אני מבצע עסקה ולא עובר הכרטיס, מה עושים?';
-const response = getChatbotResponse(query).then(response => {
+const query = 'שלום אני טס לחול מחר' + ' \n\n###\n\n';
+getChatbotResponse(query).then(response => {
   console.log('response: ', response);
 }).catch(error => {
   console.log('error: ', error);
 });
+
+// results:
+// 1 = ChangeCreditLimit
+// 2 = BlockCard
+// 3 = GoingAbroad
+// 4 = SecretCode
 
