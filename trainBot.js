@@ -3,7 +3,7 @@ const fs = require('fs');
 
 // Set up OpenAI API credentials
 const config = new Configuration({
-  apiKey: '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'
+  apiKey: ''
 })
 
 const openai = new OpenAIApi(config);
@@ -26,7 +26,7 @@ async function uploadTrainingFileForFineTuning() {
 
 async function fineTune(){
   let fineTuneReq = {
-    training_file: 'file-Oorn8BHxkClVR681trrVHfKp',
+    training_file: 'file-kOtgKVPLBBZcSgELSKDNnWiS',
     model: 'ada',
     suffix: '_cal-customer-support-classification'
   }
@@ -40,7 +40,7 @@ async function fineTune(){
 
 async function followFineTune() {
   try {
-    const res = await openai.retrieveFineTune('ft-xsxUagwkFG6tSKAXYP5MeOp5');
+    const res = await openai.retrieveFineTune('ft-P7XKRlN4llTBQ059JvB4WEiC');
     console.log('fine tuning retrieved! status:', res.data.status);
     if (res.data.status == 'succeeded') {
       console.log('customized model name for testing:', res.data.fine_tuned_model)
