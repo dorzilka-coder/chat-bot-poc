@@ -17,7 +17,7 @@ async function uploadTrainingFileForFineTuning() {
   // 3 = GoingAbroad
   // 4 = SecretCode
   try {
-    const res = await openai.createFile(fs.createReadStream("trainingData-classification.jsonl"), "fine-tune");
+    const res = await openai.createFile(fs.createReadStream("trainingData-classification2.jsonl"), "fine-tune");
     console.log('file uploaded! training_file for fineTune = ', res.data.id);
   } catch (error) {
     console.log('ERRoR', error);
@@ -26,9 +26,9 @@ async function uploadTrainingFileForFineTuning() {
 
 async function fineTune(){
   let fineTuneReq = {
-    training_file: 'file-kOtgKVPLBBZcSgELSKDNnWiS',
-    model: 'ada',
-    suffix: '_cal-customer-support-classification'
+    training_file: 'file-LxSeajI36PKH9Gvsfs4oPTSw',
+    model: 'davinci:ft-cal-digital:cal-customer-support-classification-2023-03-22-13-35-24',
+    //suffix: '_cal-customer-support-classification'
   }
   try {
     const res = await openai.createFineTune(fineTuneReq);
@@ -40,7 +40,7 @@ async function fineTune(){
 
 async function followFineTune() {
   try {
-    const res = await openai.retrieveFineTune('ft-P7XKRlN4llTBQ059JvB4WEiC');
+    const res = await openai.retrieveFineTune('ft-ZhqBUqKp5GWXplaKLXGvIYMa');
     console.log('fine tuning retrieved! status:', res.data.status);
     if (res.data.status == 'succeeded') {
       console.log('customized model name for testing:', res.data.fine_tuned_model)

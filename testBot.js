@@ -14,7 +14,7 @@ async function getChatbotResponse(query) {
 
   try {
     const completions = await openai.createCompletion({
-      model: 'ada:ft-cal-digital:cal-customer-support-classification-2023-03-19-08-54-53',
+      model: 'davinci:ft-cal-digital-2023-03-28-06-58-36', //'ada:ft-cal-digital:cal-customer-support-classification-2023-03-19-08-54-53',
       //suffix: '_cal-customer-support',
       prompt: prompt,
       max_tokens: 1, // don't change
@@ -39,7 +39,8 @@ async function getChatbotResponse(query) {
 
 
 // Example usage:
-const query = 'הלך לי הארנק ולא יודע איפה האשראי שלי' + ' \n\n###\n\n';
+const query = 'ה NFC לא עובד'+ ' \n\n###\n\n';
+
 getChatbotResponse(query).then(response => {
   console.log('response:', response);
 }).catch(error => {
